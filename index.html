@@ -1,196 +1,314 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>算法学习导航</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
-      body {
-        font-family: "Inter", "Microsoft YaHei", sans-serif;
-        background: linear-gradient(135deg, #1a2a6c, #2d388a, #4a4b8c);
-        min-height: 100vh;
-        padding: 0;
-        margin: 0;
-        color: #fff;
-      }
-
-      .nav-item {
-        transition: all 0.3s ease;
-        transform-origin: center;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .nav-item:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .logo-container {
-        transition: all 0.3s ease;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .nav-item:hover .logo-container {
-        transform: scale(1.1);
-      }
-
-      .btn-visit {
-        transition: all 0.3s ease;
-      }
-
-      .btn-visit:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .desc-container {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        min-height: 96px;
-      }
-
-      .glow {
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2d388a, #4a4b8c);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* 头部样式 */
+        header {
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #a1c4fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* 主要内容区 */
+        main {
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        /* 导航项样式 */
+        .nav-item {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .item-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .logo-container {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .nav-item:hover .logo-container {
+            transform: scale(1.1);
+        }
+        
+        .logo-container img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 5px;
+        }
+        
+        .item-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: white;
+        }
+        
+        .desc-container {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex: 1;
+            
+            /* 文本溢出处理 */
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 96px;
+        }
+        
+        .btn-container {
+            margin-top: auto;
+        }
+        
+        .btn-visit {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-visit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+        
+        .gradient-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #a1c4fd);
+        }
+        
+        /* 底部样式 */
+        footer {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
-  </head>
-  <body class="min-h-screen flex flex-col">
+</head>
+<body>
     <!-- 头部 -->
-    <header class="py-12 px-4 text-center">
-      <div class="max-w-4xl mx-auto">
-        <h1
-          class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text"
-        >
-          算法学习导航
-        </h1>
-        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-          精选优质算法学习资源，助力提升编程能力与面试竞争力
-        </p>
-      </div>
+    <header>
+        <div class="header-container">
+            <h1>算法学习导航</h1>
+            <p class="subtitle">精选优质算法学习资源，助力提升编程能力与面试竞争力</p>
+        </div>
     </header>
 
     <!-- 主要内容区 -->
-    <main class="flex-grow py-6 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- 内容由JavaScript动态生成 -->
+    <main>
+        <div class="container">
+            <div class="nav-grid" id="nav-grid">
+                <!-- 内容由JavaScript动态生成 -->
+            </div>
         </div>
-      </div>
     </main>
 
     <!-- 底部 -->
-    <footer class="py-8 text-center text-gray-300">
-      <div class="max-w-6xl mx-auto">
-        <p class="text-sm md:text-base">
-          © <span id="current-year">2023</span> 算法学习导航 |
-          精选优质资源，提升编程能力
-        </p>
-      </div>
+    <footer>
+        <div class="container">
+            <p>© <span id="current-year">2025</span> 算法学习导航 | 精选优质资源，提升编程能力</p>
+        </div>
     </footer>
 
     <script>
-      // 网站数据
-      const sites = [
-        {
-          logo: "https://assets.leetcode.cn/aliyun-lc-upload/uploaded_files/2021/03/73c9f099-abbe-4d94-853f-f8abffd459cd/leetcode.png",
-          title: "力扣 (LeetCode)",
-          desc: "全球极客挚爱的技术成长平台，提供海量技术题库、求职面试、竞赛等内容。拥有2000+原创编程题库，支持16+编程语言，是提升编程能力的首选平台。",
-          link: "https://leetcode.cn",
-        },
-        {
-          logo: "https://codetop.cc/logo.jpg",
-          title: "CodeTop",
-          desc: "专注于收集互联网大厂面试真题，支持按公司、岗位、频率等查询高频题目。实时更新大厂考察频率最高的算法题，提供最优解题思路，助力面试准备。",
-          link: "https://codetop.cc",
-        },
-        {
-          logo: "https://www.hello-algo.com/assets/images/logo.svg",
-          title: "Hello 算法",
-          desc: "一本动画图解、能运行、可提问的数据结构与算法入门书。提供可视化学习体验，支持多种编程语言代码示例，是算法初学者的理想选择。",
-          link: "https://www.hello-algo.com",
-        },
-        {
-          logo: "https://file1.kamacoder.com/i/web/20250421212153.png",
-          title: "代码随想录",
-          desc: "Carl的刷题笔记，详细讲解计算机基础知识、LeetCode刷题攻略等。提供系统化的算法学习路线，涵盖基础到进阶内容，配有详细题解和总结。",
-          link: "https://www.programmercarl.com",
-        },
-        {
-          logo: "https://assets.leetcode.cn/aliyun-lc-upload/users/endlesscheng/avatar_1690721039.png",
-          title: "灵茶山艾府",
-          desc: "分享｜如何科学刷题？",
-          link: "https://leetcode.cn/discuss/post/3141566",
-        },
-        {
-          logo: "https://labuladong.online/algo/logo.svg",
-          title: "labuladong 的算法笔记",
-          desc: "致力于把算法讲清楚，提供最有趣、最专业的算法刷题解决方案 🌟",
-          link: "https://labuladong.online",
-        },
-      ];
+        // 网站数据
+        const sites = [
+            {
+                logo: "https://assets.leetcode.cn/aliyun-lc-upload/uploaded_files/2021/03/73c9f099-abbe-4d94-853f-f8abffd459cd/leetcode.png",
+                title: "力扣 (LeetCode)",
+                desc: "全球极客挚爱的技术成长平台，提供海量技术题库、求职面试、竞赛等内容。拥有2000+原创编程题库，支持16+编程语言，是提升编程能力的首选平台。",
+                link: "https://leetcode.cn",
+            },
+            {
+                logo: "https://codetop.cc/logo.jpg",
+                title: "CodeTop",
+                desc: "专注于收集互联网大厂面试真题，支持按公司、岗位、频率等查询高频题目。实时更新大厂考察频率最高的算法题，提供最优解题思路，助力面试准备。",
+                link: "https://codetop.cc",
+            },
+            {
+                logo: "https://www.hello-algo.com/assets/images/logo.svg",
+                title: "Hello 算法",
+                desc: "一本动画图解、能运行、可提问的数据结构与算法入门书。提供可视化学习体验，支持多种编程语言代码示例，是算法初学者的理想选择。",
+                link: "https://www.hello-algo.com",
+            },
+            {
+                logo: "https://file1.kamacoder.com/i/web/20250421212153.png",
+                title: "代码随想录",
+                desc: "Carl的刷题笔记，详细讲解计算机基础知识、LeetCode刷题攻略等。提供系统化的算法学习路线，涵盖基础到进阶内容，配有详细题解和总结。",
+                link: "https://www.programmercarl.com",
+            },
+            {
+                logo: "https://assets.leetcode.cn/aliyun-lc-upload/users/endlesscheng/avatar_1690721039.png",
+                title: "灵茶山艾府",
+                desc: "分享｜如何科学刷题？",
+                link: "https://leetcode.cn/discuss/post/3141566",
+            },
+            {
+                logo: "https://labuladong.online/algo/logo.svg",
+                title: "labuladong 的算法笔记",
+                desc: "致力于把算法讲清楚，提供最有趣、最专业的算法刷题解决方案 🌟",
+                link: "https://labuladong.online",
+            },
+        ];
 
-      // 动态生成内容
-      function renderSites() {
-        const container = document.querySelector(".grid");
-        container.innerHTML = "";
-
-        sites.forEach((site) => {
-          const item = document.createElement("div");
-          item.className =
-            "nav-item bg-gray-800 bg-opacity-40 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full";
-
-          item.innerHTML = `
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="logo-container w-16 h-16 p-2 flex items-center justify-center mb-4 glow">
-                            <img src="${site.logo}" alt="${site.title}" class="max-h-12 max-w-[3rem] rounded-lg">
+        // 动态生成内容
+        function renderSites() {
+            const container = document.getElementById('nav-grid');
+            container.innerHTML = '';
+            
+            sites.forEach(site => {
+                const item = document.createElement('div');
+                item.className = 'nav-item';
+                
+                item.innerHTML = `
+                    <div class="gradient-bar"></div>
+                    <div class="item-content">
+                        <div class="logo-container">
+                            <img src="${site.logo}" alt="${site.title}">
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">${site.title}</h3>
-                        <div class="desc-container text-gray-300 mb-6 flex-grow" title="${site.desc}">
+                        <h3 class="item-title">${site.title}</h3>
+                        <div class="desc-container" title="${site.desc}">
                             ${site.desc}
                         </div>
-                        <div class="mt-auto pt-4">
-                            <a href="${site.link}" target="_blank" class="btn-visit inline-block w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg text-center">
-                                访问网站 <i class="fas fa-external-link-alt ml-2"></i>
+                        <div class="btn-container">
+                            <a href="${site.link}" target="_blank" class="btn-visit">
+                                访问网站 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
-                    <div class="h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"></div>
                 `;
+                
+                container.appendChild(item);
+            });
+        }
 
-          container.appendChild(item);
+        // 更新年份
+        function updateYear() {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('current-year').textContent = `2025 - ${currentYear}`;
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSites();
+            updateYear();
         });
-      }
-
-      // 更新年份
-      function updateYear() {
-        const currentYear = new Date().getFullYear();
-        document.getElementById(
-          "current-year"
-        ).textContent = `2025 - ${currentYear}`;
-      }
-
-      // 初始化
-      document.addEventListener("DOMContentLoaded", () => {
-        renderSites();
-        updateYear();
-      });
     </script>
-  </body>
+</body>
 </html>
